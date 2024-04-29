@@ -28,8 +28,6 @@ export const authOptions = {
 
                 if (!passwordMatch) throw new Error ("Invalid password");
 
-                console.log("user found", userFound);
-
                 return { ...userFound, email: credentials.email }
             }
         })

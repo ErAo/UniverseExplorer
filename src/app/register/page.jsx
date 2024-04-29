@@ -17,6 +17,7 @@ export default function Register() {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [error, setError] = useState('');
 	const invalidPassword = password !== confirmPassword;
+	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
 
@@ -41,6 +42,7 @@ export default function Register() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setLoading(true);
 		const toastLoading = toast.loading(messages.loading, { position: 'bottom-right' });
 		try {
 			const signUpResponse = await fetch('http://localhost:3000/api/auth/signup', {
@@ -73,6 +75,7 @@ export default function Register() {
 				}
 			}
 		} catch (error) {
+			setLoading(false);
 			toast.dismiss(toastLoading);
 			toast.error(messages.error(error.message), { duration: 4000, position: 'bottom-right' });
 			setError(error.message);
@@ -136,8 +139,8 @@ export default function Register() {
 								</div>
 							</div>
 
-							<PrimaryBtn clases={`submit`} disabled={invalidPassword || password == '' ? true : false}>
-								Confirm
+							<PrimaryBtn clases={`submit`} disabled={invalidPassword || password == '' || loading ? true : false}>
+								{loading ? messages.loading : 'Confirm'}
 							</PrimaryBtn>
 						</form>
 					</div>

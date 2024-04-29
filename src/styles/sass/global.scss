@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'fonts';
 @import 'colors';
+@import 'mixins/scrollbar.scss';
 @import 'animations';
 @import 'mixins';
 @import 'buttons';
@@ -228,7 +229,7 @@ body {
 	.dashboard__grid-container,
 	.dashboard__grid-container__edition {
 		display: grid;
-		grid-template-columns: 1fr 5fr;
+		grid-template-columns: 2fr 5fr;
 		height: 100%;
 
 		&__edition {
@@ -236,6 +237,8 @@ body {
 		}
 
 		.dashboard__side-menu {
+			@include custom-scrollbar($sun, $wather, $sun);
+
 			background-color: $wather;
 			display: flex;
 			flex-direction: column;
@@ -246,8 +249,9 @@ body {
 			overflow: hidden scroll;
 
 			ul {
-				margin: 5rem 0;
+				margin: 5rem 1.5rem;
 				list-style: none;
+				padding: 0;
 
 				li a {
 					margin-bottom: 2rem;

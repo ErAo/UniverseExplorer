@@ -13,6 +13,7 @@ export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState();
+	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
 
@@ -36,6 +37,7 @@ export default function Login() {
 	};
 
 	const handleSubmit = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 		const toastLoading = toast.loading(messages.loading, { position: 'bottom-right' });
 
@@ -53,13 +55,14 @@ export default function Login() {
 				router.push('/dashboard');
 				router.refresh();
 			} else {
-				if (res?.error) {
-					return setError(res.error);
+				if (res.error) {
+					throw new Error(res.error);
 				} else {
-					throw new Error(errorData.message || 'Error to try login');
+					throw new Error('Error trying to login');
 				}
 			}
 		} catch (error) {
+			setLoading(false);
 			toast.dismiss(toastLoading);
 			toast.error(messages.error(error.message), { duration: 4000, position: 'bottom-right' });
 			setError(error.message);
@@ -91,7 +94,9 @@ export default function Login() {
 								</label>
 							</div>
 
-							<PrimaryBtn clases={`submit`}>SignIn</PrimaryBtn>
+							<PrimaryBtn clases={`submit`} disabled={loading ? true : false}>
+								{loading ? messages.loading : 'SignIn'}
+							</PrimaryBtn>
 						</form>
 					</div>
 					<Toaster />

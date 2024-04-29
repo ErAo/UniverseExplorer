@@ -1,6 +1,7 @@
 'use client';
+
 import React, { useState } from 'react';
-import SolarSystem from '../components/SolarSystem'
+import SolarSystem from '../components/SolarSystem';
 import systemSolar from '../mocks/solar_system.json';
 import EditMenu from '../components/EditMenu';
 import * as Icon from 'react-feather';
@@ -51,4 +52,3 @@ export default function SolarSystemLayout() {
         </>
     );
 }
-
