@@ -3,15 +3,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Earth from '../../components/Earth';
-
+import Layout from '../../layouts/DashboardLayout';
 const page = () => {
 	return (
-		<>
+		<Layout>
 			<h3>Tus ultimos modelos</h3>
 			<div className='dashboard__content-grid'>
 				<Items />
 			</div>
-		</>
+		</Layout>
 	);
 };
 

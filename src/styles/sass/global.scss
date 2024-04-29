@@ -24,6 +24,28 @@ body {
 	}
 }
 
+* {
+	box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent; 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $earth; 
+	opacity: 0.8
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	opacity: 1;
+}
+
 .navigation {
 	background-color: $wather;
 	display: flex;
@@ -203,16 +225,25 @@ body {
 	height: 100vh;
 	z-index: 9;
 
-	.dashboard__grid-container {
+	.dashboard__grid-container,
+	.dashboard__grid-container__edition {
 		display: grid;
 		grid-template-columns: 1fr 5fr;
 		height: 100%;
+
+		&__edition {
+			grid-template-columns: auto 3fr;
+		}
 
 		.dashboard__side-menu {
 			background-color: $wather;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
+			position: sticky;
+			top: 0;
+			height: 100vh;
+			overflow: hidden scroll;
 
 			ul {
 				margin: 5rem 0;
@@ -364,6 +395,59 @@ footer {
 // 	background: #fff;
 // }
 
+.has-sticky-bottom {
+	position: sticky;
+    bottom: 1rem;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+
+	&__content {
+		background: $wather;
+		padding: 2rem;
+		border-radius: 10px;
+		box-shadow: 0px 0px 8px white;
+		backdrop-filter: blur(12px);
+		width: 90%;
+		height: 90%;
+	}
+
+	&__close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		cursor: pointer;
+		z-index: 1;
+		padding: 0;
+		border: none;
+		background: #c82121;
+		border-radius: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 35px;
+		height: 35px;
+		color: #fff;
+
+		svg {
+			width: 20px;
+			height: 20px;
+			margin-bottom: 0.2rem;
+			margin-right: 0.2rem;
+		}
+	}
+}
+
 .earth_model {
 	position: fixed;
 	top: 0;
@@ -375,13 +459,13 @@ footer {
 .SolarSystem {
 	position: relative;
 	overflow: hidden;
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 }
 
 #myThreeJsCanvas {
 	width: 100% !important;
-	height: 100vh !important;
+	height: 100% !important;
 	object-fit: cover;
 }
 

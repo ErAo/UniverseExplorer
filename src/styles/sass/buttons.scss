@@ -67,6 +67,48 @@ button {
 	& a:hover {
 		color: $light;
 	}
+
+	&.btn {
+		color: $light;
+		border: none;
+		padding: 0.5rem 2rem;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		width: 3rem;
+		font-size: 1.6rem;
+	}
+
+	&.array-item-remove {
+		background-color: #ff0000;
+
+		&::before {
+			content: '×';
+		}
+	}
+
+	&.array-item-move-down,
+	&.array-item-move-up {
+		background-color: $wather;
+	}
+
+	&.array-item-move-down{
+		&::before {
+			content: '↓';
+		}
+	}
+
+	&.array-item-move-up {
+		&::before {
+			content: '↑';
+		}
+	}
+
+	&.btn-add {
+		background-color: $sun;
+		&::before {
+			content: '+';
+		}
+	}
 }
 
 a {

@@ -28,36 +28,29 @@ export default class Orbit {
         };
     }
 
-    setDirectionalLight(x, y, z, name = "mainDirectionalLight") {
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(-1, 0, 0);
-        directionalLight.target.position.set(0, 0, 0);
-        directionalLight.name = name;
-        directionalLight.castShadow = true;
+    setDirectionalLight() {
+        const light = new THREE.PointLight(0xffffff, 1, 0, 0, 1);
 
-        console.log("directionalLight", directionalLight)
-        this.scene.add(directionalLight);
+        // shadow
+        light.castShadow = true;
+        light.shadow.mapSize.width = 1024;
+        light.shadow.mapSize.height = 1024;
+        light.shadow.camera.near = 0.5;
+        light.shadow.camera.far = 500;
+        light.shadow.camera.left = -100;
+        light.shadow.camera.right = 100;
+        light.shadow.camera.top = 100;
+        light.shadow.camera.bottom = -100;
+        light.shadow.bias = -0.005;
+        light.shadow.radius = 4;
 
-        // const pointLight = new THREE.PointLight(0xffffff, 1);
-        // pointLight.castShadow = true;
-        // pointLight.shadow.mapSize.width = 4096;
-        // pointLight.shadow.mapSize.height = 4096;
-        // pointLight.shadow.camera.near = 1.5;
-        // pointLight.shadow.camera.far = 30;
-        // pointLight.shadow.radius = 16;
-        // this.scene.add(pointLight);
+
+        this.scene.add(light);
     }
 
     setAmbientLight() {
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.03);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.09);
         this.scene.add(ambientLight);
-    }
-
-    updateLightRota() {
-        const light = this.scene.getObjectByName("mainDirectionalLight");
-        if (light) {
-            light.position.set(this.orbit.position.x, this.orbit.position.y, this.orbit.position.z);
-        }
     }
 
     getMesh() {
@@ -69,7 +62,7 @@ export default class Orbit {
 
             // create mesh for camera lookAt 
 
-            this.targetCamera = new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+            this.targetCamera = new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xffff00 }));
 
             // name 
             this.mesh.name += (config.prefix ? "_" : '') + config.name;
@@ -89,6 +82,7 @@ export default class Orbit {
             }
 
             this.orbit = new THREE.Group();
+            this.orbit.name += 'orbit_' + (config.prefix ? "_" : '') + config.name;
             this.orbit.add(this.mesh);
 
             this.systemMap.orbit = this.orbit;
@@ -102,17 +96,16 @@ export default class Orbit {
             }
 
             if (config.directionalLight) {
-                this.setDirectionalLight(this.orbit.position.x, this.orbit.position.y, this.orbit.position.z);
+                this.setDirectionalLight();
             }
 
             if (config.ambientLight) {
                 this.setAmbientLight();
             }
-
-
             if (config.planets) {
                 config.planets.forEach((planet, index) => {
                     planet.prefix = "planet";
+                    planet.directionalLight = true;
                     const planetOrbit = new Orbit({
                         config: planet,
                         scene: this.scene,
@@ -161,7 +154,10 @@ export default class Orbit {
                     this.mesh.add(mesh);
 
                     const suffix = this.systemMap.rings[mesh.name] ? '_' + index : '';
-                    this.systemMap.rings[mesh.name + suffix] = mesh
+                    this.systemMap.rings[mesh.name + suffix] = {
+                        mesh,
+                        config: ring
+                    }
                 });
             }
 
@@ -170,11 +166,14 @@ export default class Orbit {
                     const newLayer = new Sphere(layer.radius, 0, layer.texture, 'layer');
                     const layerMesh = newLayer.getMesh();
                     // planet opacities
-                    layerMesh.material.transparent = layer.opacity ? true : false;
+                    layerMesh.material.transparent = true;
                     layerMesh.material.opacity = layer.opacity;
                     this.mesh.add(layerMesh);
                     const suffix = this.systemMap.layers[layerMesh.name] ? '_' + index : '';
-                    this.systemMap.layers[layerMesh.name + suffix] = layerMesh
+                    this.systemMap.layers[layerMesh.name + suffix] = {
+                        mesh: layerMesh,
+                        config: layer
+                    }
                 })
             }
 

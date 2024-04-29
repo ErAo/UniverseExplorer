@@ -8,10 +8,36 @@ const log = (type) => console.log.bind(console, type);
 
 // read json file and convert to schema
 
+
+const jsonNames = {
+	"stars": 'Estrellas ',
+	"planets": 'Planetas ',
+	"moons": 'Lunas ',
+	"speed": 'Velocidad ',
+	"layers": 'Capas ',
+	"name": "Identificador",
+	"display_name": "Nombre a mostrar",
+	"radius": "Radio",
+	"texture": "Textura",
+	"orbit_speed": "Velocidad de traslación",
+	"rotation_speed": "Velocidad de rotación",
+	"description": "Descripción",
+	"distance": "Distancia",
+	"day": "Duración del día en horas",
+	"year": "Duración del año en días",
+	"opacity": 'Opacidad ',
+	"prefix": "Prefijo",
+	"insideRadius": "Distancia del Radio interior",
+	"outsideRadius": "Distancia del Radio exterior",
+	"segments": "Segmentos",
+	"directionalLight": "Iluminación direccional",
+}
+
 function convertJsonToSchema(json) {
+	let title = json.display_name ? json.display_name : 'Solar System';
 	let schema = {
-		title: 'Solar System',
 		type: 'object',
+		title: title,
 		properties: {},
 	};
 
@@ -19,13 +45,15 @@ function convertJsonToSchema(json) {
 		let value = json[key];
 		let type = typeof value;
 
+		let title = jsonNames[key] ? jsonNames[key] : key;
 		if (Array.isArray(value)) {
 			type = 'array';
 			value = [value[0]];
+			title = title;
 		}
 		let property = {
 			type: type,
-			title: key,
+			title: title,
 			default: value,
 		};
 
