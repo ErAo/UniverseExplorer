@@ -8,7 +8,7 @@ const layerSchema = new Schema(
             required: [true, "name is required"],
             match: [/^[a-z_]+$/, "invalid name"]
         },
-        displayName: {
+        display_name: {
             type: String,
             required: [true, "display name is required"],
             match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
@@ -27,10 +27,10 @@ const layerSchema = new Schema(
             type: String,
             required: true,
         },
-        speed: {
+        rotation_speed: {
             type: Number,
-            required: [true, "speed is required"],
-            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid speed"]
+            required: [true, "rotation_speed is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid rotation_speed"]
         },
         description: {
             type: String,
@@ -51,7 +51,7 @@ const moonSchema = new Schema(
             required: [true, "name is required"],
             match: [/^[a-z_]+$/, "invalid name"]
         },
-        displayName: {
+        display_name: {
             type: String,
             required: [true, "display name is required"],
             match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
@@ -65,6 +65,16 @@ const moonSchema = new Schema(
             type: Number,
             required: [true, "distance is required"],
             match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid distance"]
+        },
+        orbit_speed: {
+            type: Number,
+            required: [true, "orbit_speed is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid orbit_speed"]
+        },
+        rotation_speed: {
+            type: Number,
+            required: [true, "rotation_speed is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid rotation_speed"]
         },
         texture: {
             type: String,
@@ -99,20 +109,20 @@ const ringSchema = new Schema(
             required: [true, "name is required"],
             match: [/^[a-z_]+$/, "invalid name"]
         },
-        displayName: {
+        display_name: {
             type: String,
             required: [true, "display name is required"],
             match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
         },
-        insideRadius: {
+        inside_radius: {
             type: Number,
-            required: [true, "insideRadius is required"],
-            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid insideRadius"]
+            required: [true, "inside_radius is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid inside_radius"]
         },
-        outsideRadius: {
+        outside_radius: {
             type: Number,
-            required: [true, "outsideRadius is required"],
-            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid outsideRadius"]
+            required: [true, "outside_radius is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid outside_radius"]
         },
         segments: {
             type: Number,
@@ -138,7 +148,7 @@ const planetSchema = new Schema(
             required: [true, "name is required"],
             match: [/^[a-z_]+$/, "invalid name"]
         },
-        displayName: {
+        display_name: {
             type: String,
             required: [true, "display name is required"],
             match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
@@ -156,6 +166,16 @@ const planetSchema = new Schema(
             type: Number,
             required: [true, "center distance is required"],
             match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid center distance"]
+        },
+        orbit_speed: {
+            type: Number,
+            required: [true, "orbit_speed is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid orbit_speed"]
+        },
+        rotation_speed: {
+            type: Number,
+            required: [true, "rotation_speed is required"],
+            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid rotation_speed"]
         },
         year: {
             type: Number,
@@ -189,7 +209,7 @@ const starSchema = new Schema(
             required: [true, "name is required"],
             match: [/^[a-z_]+$/, "invalid name"]
         },
-        displayName: {
+        display_name: {
             type: String,
             required: [true, "display name is required"],
             match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
@@ -221,7 +241,7 @@ const starSchema = new Schema(
 
 const solarSystemSchema = new Schema(
     {
-        userId: {
+        user_id: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
@@ -232,15 +252,10 @@ const solarSystemSchema = new Schema(
             required: [true, "name is required"],
             match: [/^[a-z_]+$/, "invalid name"]
         },
-        displayName: {
+        display_name: {
             type: String,
             required: [true, "display name is required"],
             match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
-        },
-        scaleFactor: {
-            type: Number,
-            required: [true, "scale factor is required"],
-            match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid scale factor"]
         },
         planets: [planetSchema],
         stars: [starSchema]

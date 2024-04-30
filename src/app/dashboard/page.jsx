@@ -1,5 +1,7 @@
 import React from 'react';
 import Layout from '../../layouts/DashboardLayout';
+import Dashboard_ListModels from "./../../components/Dashboard_ListModels";
+
 const page = () => {
 	return (
 		<Layout>

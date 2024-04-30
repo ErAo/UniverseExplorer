@@ -30,26 +30,28 @@ export async function GET(request, { params }) {
 };
 
 
-//PUT METHOD BT ID
+//PUT METHOD BY ID
 export async function PUT(request, { params }) {
     try {
         const { id } = params;
         
-        const { putName: name, putDisplayName: displayName, putScaleFactor: scaleFactor, putPlanets: planets, putStars: stars} = await request.json();
+        const { put_name: name, put_display_name: display_name,  put_planets: planets, put_stars: stars} = await request.json();
         
         const { SolarSystem } = await DB();
 
         //UPDATE PLANETS
         const putProcessedPlanets = [];
         for (const planetData of planets) {
-            const { putName: name, putDisplayName: displayName, putRadius: radius, putTexture: texture, putDistance: distance, putYear: year, putDay: day, putDescription: description, putLayers: layers, putMoons: moons, putRings: rings } = planetData;
+            const { put_name: name, put_display_name: display_name, put_radius: radius, put_texture: texture, put_distance: distance, put_orbit_speed: orbit_speed, put_rotation_speed: rotation_speed, put_year: year, put_day: day, put_description: description, put_layers: layers, put_moons: moons, put_rings: rings } = planetData;
 
             const putPlanet = {
                 name, 
-                displayName,
+                display_name,
                 radius,
                 texture,
                 distance,
+                orbit_speed,
+                rotation_speed,
                 year,
                 day, 
                 description,
@@ -60,14 +62,14 @@ export async function PUT(request, { params }) {
 
             // PUT LAYERS
             for (const layerData of layers) {
-                const { putName: name, putDisplayName: displayName, putRadius: radius, putOpacity: opacity, putTexture:texture, putSpeed:speed, putDescription: description } = layerData;
+                const { put_name: name, put_display_name: display_name, put_radius: radius, putOpacity: opacity, put_texture:texture, put_rotation_speed: rotation_speed, put_description: description } = layerData;
                 const putLayer = {
                     name,
-                    displayName,
+                    display_name,
                     radius,
                     opacity,
                     texture,
-                    speed,
+                    rotation_speed,
                     description
                 };
 
@@ -76,12 +78,14 @@ export async function PUT(request, { params }) {
 
             // PUT MOONS
             for (const moonData of moons) {
-                const { putName:name,  putDisplayName: displayName, putRadius:radius, putDistance: distance, putTexture:texture,  putYear: year, putDay: day, putDescription: description } = moonData;
+                const { put_name:name,  put_display_name: display_name, put_radius:radius, put_distance: distance, put_orbit_speed: orbit_speed, put_rotation_speed: rotation_speed, put_texture:texture,  put_year: year, put_day: day, put_description: description } = moonData;
                 const putMoon = {
                     name,
-                    displayName,
+                    display_name,
                     radius,
                     distance,
+                    orbit_speed,
+                    rotation_speed,
                     texture,
                     year,
                     day,
@@ -92,12 +96,12 @@ export async function PUT(request, { params }) {
             };
             //PUT RINGS
             for (const ringData of rings) {
-                const { putName:name,  putDisplayName: displayName, putInsideRadius:insideRadius, putOutsideRadius: outsideRadius, putSegments:segments, putDescription: description } = ringData;
+                const { put_name:name,  put_display_name: display_name, put_inside_radius:inside_radius, put_outside_radius: outside_radius, put_segments:segments, put_description: description } = ringData;
                 const putRing = {
                     name,
-                    displayName,
-                    insideRadius,
-                    outsideRadius,
+                    display_name,
+                    inside_radius,
+                    outside_radius,
                     segments,
                     description
                 };
@@ -111,11 +115,11 @@ export async function PUT(request, { params }) {
         //UPDATE STARS 
         const putProcessedStars = [];
         for (const starData of stars){
-            const { putName: name, putDisplayName: displayName, putRadius: radius, putTexture: texture, putSpeed: speed, putDescription: description } = starData;
+            const { put_name: name, put_display_name: display_name, put_radius: radius, put_texture: texture, put_speed: speed, put_description: description } = starData;
 
             const putStar = {
                 name,
-                displayName,
+                display_name,
                 radius,
                 texture,
                 speed,
@@ -128,8 +132,7 @@ export async function PUT(request, { params }) {
         //UPDATE SOLAR SYSTEM 
         const putSolarSystem = await SolarSystem.findByIdAndUpdate(id, {
             name,
-            displayName,
-            scaleFactor,
+            display_name,
             planets: putProcessedPlanets,
             stars: putProcessedStars
         }, { new: true });
