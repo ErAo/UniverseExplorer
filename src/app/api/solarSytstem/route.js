@@ -7,21 +7,23 @@ import mongoose from "mongoose";
 export async function POST(request) {
     try {
         //BASIC INFORMATION ABOUT SOLAR SYSTEM
-        const { userId, name, displayName, scaleFactor, planets, stars } = await request.json();
+        const { user_id, name, display_name, planets, stars } = await request.json();
 
         const { SolarSystem } = await DB();
 
         //CREATE PLANETS
         const processedPlanets = [];
         for (const planetData of planets) {
-            const { name, displayName, radius, texture, distance, year, day, description, layers, moons, rings } = planetData;
+            const { name, display_name, radius, texture, distance, orbit_speed, rotation_speed, year, day, description, layers, moons, rings } = planetData;
 
             const createPlanet = {
                 name,
-                displayName,
+                display_name,
                 radius,
                 texture,
                 distance,
+                orbit_speed,
+                rotation_speed,
                 year,
                 day,
                 description,
@@ -34,11 +36,11 @@ export async function POST(request) {
             for (const layerData of layers) {
                 const createLayer = {
                     name: layerData.name,
-                    displayName: layerData.displayName,
+                    display_name: layerData.display_name,
                     radius: layerData.radius,
                     opacity: layerData.opacity,
                     texture: layerData.texture,
-                    speed: layerData.speed,
+                    rotation_speed: layerData.rotation_speed,
                     description: layerData.description
                 };
 
@@ -48,9 +50,11 @@ export async function POST(request) {
             for (const moonData of moons) {
                 const createMoon = {
                     name: moonData.name,
-                    displayName: moonData.displayName,
+                    display_name: moonData.display_name,
                     radius: moonData.radius,
                     distance: moonData.distance,
+                    orbit_speed: moonData.orbit_speed,
+                    rotation_speed: moonData.rotation_speed,
                     texture: moonData.texture,
                     year: moonData.year,
                     day: moonData.day,
@@ -63,9 +67,9 @@ export async function POST(request) {
             for (const ringData of rings) {
                 const createRing = {
                     name: ringData.name,
-                    displayName: ringData.displayName,
-                    insideRadius: ringData.insideRadius,
-                    outsideRadius: ringData.outsideRadius,
+                    display_name: ringData.display_name,
+                    inside_radius: ringData.inside_radius,
+                    outside_radius: ringData.outside_radius,
                     segments: ringData.segments,
                     description: ringData.description
                 };
@@ -79,11 +83,11 @@ export async function POST(request) {
         //CREATE STAR
         const processedStars = [];
         for (const starData of stars){
-            const { name, displayName, radius, texture, speed, description } = starData;
+            const { name, display_name, radius, texture, speed, description } = starData;
 
             const createStar = {
                 name,
-                displayName,
+                display_name,
                 radius,
                 texture,
                 speed,
@@ -95,10 +99,9 @@ export async function POST(request) {
 
         // CREATE SOLAR SYSTEM
         const createSolarSystem = new SolarSystem({ 
-            userId, 
+            user_id, 
             name, 
-            displayName, 
-            scaleFactor, 
+            display_name,
             planets: processedPlanets, 
             stars: processedStars
         });

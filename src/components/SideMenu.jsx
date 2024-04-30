@@ -37,44 +37,38 @@ const SideMenu = () => {
 
 	return (
 		<>
-			{isEdit ? (
-				<EditMenu setIsEditPage={setIsEditPage} handleChange={handleSystemChange} schema={systemSolar} />
-			) : (
-				<>
-					<ul>
-						<li>
-							<Link href='/dashboard'>
-								<Icon.Home size='21' />
-								Dashboard
-							</Link>
-						</li>
-						<li>
-							<Link href='/dashboard/profile'>
-								<Icon.User size='21' />
-								Profile
-							</Link>
-						</li>
-						<li>
-							<Link href='/dashboard/collection'>
-								<Icon.Grid size='21' />
-								Collection
-							</Link>
-						</li>
-						<li>
-							<Link href='/dashboard/import'>
-								<Icon.Upload size='21' />
-								Import
-							</Link>
-						</li>
-						<li>
-							<Link href='/dashboard/export'>
-								<Icon.Download size='21' />
-								Export
-							</Link>
-						</li>
-					</ul>
-				</>
-			)}
+			<ul>
+				<li>
+					<Link href='/dashboard'>
+						<Icon.Home size='21' />
+						Dashboard
+					</Link>
+				</li>
+				<li>
+					<Link href='/dashboard/profile'>
+						<Icon.User size='21' />
+						Profile
+					</Link>
+				</li>
+				<li>
+					<Link href='/dashboard/collection'>
+						<Icon.Grid size='21' />
+						Collection
+					</Link>
+				</li>
+				<li>
+					<Link href='/dashboard/import'>
+						<Icon.Upload size='21' />
+						Import
+					</Link>
+				</li>
+				<li>
+					<Link href='/dashboard/export'>
+						<Icon.Download size='21' />
+						Export
+					</Link>
+				</li>
+			</ul>
 			<ul className='buttons flex'>
 				<li style={{ marginRight: '1rem' }}>
 					<InvisibleBtn func={() => signOut()}>SignOut</InvisibleBtn>
