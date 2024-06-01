@@ -8,7 +8,7 @@
             "radius": 30,
             "texture": "/sun.jpg",
             "speed": 1,
-            "description": "qlq"
+            "description": "Some text here"
         }
     ],
     "planets": [
@@ -31,7 +31,7 @@
                     "opacity": 0.3,
                     "texture": "/earth_clouds.jpg",
                     "rotation_speed": 0.01,
-                    "description": "qlq"
+                    "description": "Some text here"
                 }
             ],
             "moons": [
@@ -45,176 +45,17 @@
                     "day": 24,
                     "year": 31,
                     "texture": "/venus.jpeg",
-                    "description": "qlq"
-                },
-
-                {
-                    "name": "moon",
-                    "display_name": "Moon",
-                    "radius": 1,
-                    "distance": 40,
-                    "orbit_speed": 0.01,
-                    "rotation_speed": 0.1,
-                    "day": 24,
-                    "year": 47.3,
-                    "texture": "/venus.jpeg",
-                    "description": "qlq"
+                    "description": "Some text here"
                 }
             ],
             "rings": [
                 {
                     "name": "ring",
                     "display_name": "Ring",
-                    "insideRadius": 8,
-                    "outsideRadius": 7,
+                    "inside_radius": 8,
+                    "outside_radius": 7,
                     "segments": 100,
-                    "description": "qlq"
-                }
-            ]
-        },
-
-        {
-            "name": "earth_1",
-            "display_name": "Earth",
-            "radius": 3,
-            "texture": "/earth1.jpg",
-            "distance": 500,
-            "orbit_speed": 0.1,
-            "rotation_speed": 0.01,
-            "year": 450,
-            "day": 27,
-            "description": "qlq",
-            "layers": [
-                {
-                    "name": "earth",
-                    "display_name": "Layer 1",
-                    "radius": 5.1,
-                    "opacity": 0.3,
-                    "texture": "/earth_clouds.jpg",
-                    "rotation_speed": 0.08,
-                    "description": "qlq"
-                }
-            ],
-            "moons": [
-                {
-                    "name": "moon",
-                    "display_name": "Moon",
-                    "radius": 1,
-                    "distance": 20,
-                    "day": 14,            
-                    "orbit_speed": 0.01,
-                    "rotation_speed": 0.1,
-                    "year": 50.3,
-                    "texture": "/venus.jpeg",
-                    "description": "qlq"
-                }
-            ],
-            "rings": [
-                {
-                    "name": "ring",
-                    "display_name": "Ring",
-                    "insideRadius": 8,
-                    "outsideRadius": 7,
-                    "segments": 100,
-                    "description": "qlq"
-                }
-            ]
-        },
-
-
-        {
-            "name": "earth_2",
-            "display_name": "Earth",
-            "radius": 20,
-            "texture": "/earth1.jpg",
-            "distance": 900,
-            "orbit_speed": 0.1,
-            "rotation_speed": 0.01,
-            "year": 550,
-            "day": 38,
-            "description": "qlq",
-            "layers": [
-                {
-                    "name": "earth",
-                    "display_name": "Layer 1",
-                    "radius": 5.1,
-                    "opacity": 0.3,
-                    "texture": "/earth_clouds.jpg",
-                    "rotation_speed": 0.8,
-                    "description": "qlq"
-                }
-            ],
-            "moons": [
-                {
-                    "name": "moon",
-                    "display_name": "Moon",
-                    "radius": 1,
-                    "distance": 20,
-                    "day": 13,
-                    "orbit_speed": 0.01,
-                    "rotation_speed": 0.1,
-                    "year": 30.3,
-                    "texture": "/venus.jpeg",
-                    "description": "qlq"
-                }
-            ],
-            "rings": [
-                {
-                    "name": "ring",
-                    "display_name": "Ring",
-                    "insideRadius": 8,
-                    "outsideRadius": 7,
-                    "segments": 100,
-                    "description": "qlq"
-                }
-            ]
-        },
-
-
-        {
-            "name": "earth_3",
-            "display_name": "Earth",
-            "radius": 15,
-            "texture": "/earth1.jpg",
-            "distance": 1500,
-            "orbit_speed": 0.1,
-            "rotation_speed": 0.01,
-            "year": 650,
-            "day": 1,
-            "description": "qlq",
-            "layers": [
-                {
-                    "name": "earth",
-                    "display_name": "Layer 1",
-                    "radius": 5.1,
-                    "opacity": 0.3,
-                    "texture": "/earth_clouds.jpg",
-                    "rotation_speed": 0.08,
-                    "description": "qlq"
-                }
-            ],
-            "moons": [
-                {
-                    "name": "moon",
-                    "display_name": "Moon",
-                    "radius": 1,
-                    "distance": 20,
-                    "day": 18,
-                    "year": 65.3,
-                    "orbit_speed": 0.01,
-                    "rotation_speed": 0.1,
-                    "texture": "/venus.jpeg",
-                    "description": "qlq"
-                }
-            ],
-            "rings": [
-                {
-                    "name": "ring",
-                    "display_name": "Ring",
-                    "insideRadius": 8,
-                    "outsideRadius": 7,
-                    "segments": 100,
-                    "description": "qlq"
+                    "description": "Some text here"
                 }
             ]
         }

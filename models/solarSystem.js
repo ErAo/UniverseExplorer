@@ -1,4 +1,4 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const layerSchema = new Schema(
     {
@@ -6,12 +6,11 @@ const layerSchema = new Schema(
             type: String,
             unique: true,
             required: [true, "name is required"],
-            match: [/^[a-z_]+$/, "invalid name"]
+            match: [/^[a-z_a-z]+$/, "invalid name"]
         },
         display_name: {
             type: String,
-            required: [true, "display name is required"],
-            match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
+            required: [true, "display name is required"]
         },
         radius: {
             type: Number,
@@ -49,12 +48,11 @@ const moonSchema = new Schema(
             type: String,
             unique: true,
             required: [true, "name is required"],
-            match: [/^[a-z_]+$/, "invalid name"]
+            match: [/^[a-z_a-z]+$/, "invalid name"]
         },
         display_name: {
             type: String,
-            required: [true, "display name is required"],
-            match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
+            required: [true, "display name is required"]
         },
         radius: {
             type: Number,
@@ -107,12 +105,11 @@ const ringSchema = new Schema(
             type: String,
             unique: true,
             required: [true, "name is required"],
-            match: [/^[a-z_]+$/, "invalid name"]
+            match: [/^[a-z_a-z]+$/, "invalid name"]
         },
         display_name: {
             type: String,
-            required: [true, "display name is required"],
-            match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
+            required: [true, "display name is required"]
         },
         inside_radius: {
             type: Number,
@@ -146,12 +143,11 @@ const planetSchema = new Schema(
             type: String,
             unique: true,
             required: [true, "name is required"],
-            match: [/^[a-z_]+$/, "invalid name"]
+            match: [/^[a-z_a-z]+$/, "invalid name"]
         },
         display_name: {
             type: String,
-            required: [true, "display name is required"],
-            match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
+            required: [true, "display name is required"]
         },
         radius: {
             type: Number,
@@ -161,8 +157,8 @@ const planetSchema = new Schema(
         texture: {
             type: String,
             required: true,
-        }, 
-        distance:{
+        },
+        distance: {
             type: Number,
             required: [true, "center distance is required"],
             match: [/^[0-9]+(?:\.[0-9]+)?$/, "invalid center distance"]
@@ -192,9 +188,18 @@ const planetSchema = new Schema(
             required: [true, "description is required"],
             match: [/^[^\d]+$/, "invalid description"]
         },
-        layers: [layerSchema],
-        moons: [moonSchema],
-        rings: [ringSchema]
+        layers: {
+            type: [layerSchema],
+            required: false
+        },
+        moons: {
+            type: [moonSchema],
+            required: false
+        },
+        rings: {
+            type: [ringSchema],
+            required: false
+        }
     },
     {
         timestamps: true,
@@ -207,12 +212,12 @@ const starSchema = new Schema(
             type: String,
             unique: true,
             required: [true, "name is required"],
-            match: [/^[a-z_]+$/, "invalid name"]
+            // only lowercase letters and underscores
+            match: [/^[a-z_a-z]+$/, "invalid name"]
         },
         display_name: {
             type: String,
-            required: [true, "display name is required"],
-            match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
+            required: [true, "display name is required"]
         },
         radius: {
             type: Number,
@@ -250,12 +255,11 @@ const solarSystemSchema = new Schema(
             type: String,
             unique: true,
             required: [true, "name is required"],
-            match: [/^[a-z_]+$/, "invalid name"]
+            match: [/^[a-z_a-z]+$/, "invalid name"]
         },
         display_name: {
             type: String,
-            required: [true, "display name is required"],
-            match: [/^[a-zA-Z\s\W]+$/, "invalid display name"]
+            required: [true, "display name is required"]
         },
         planets: [planetSchema],
         stars: [starSchema]

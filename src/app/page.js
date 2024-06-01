@@ -4,8 +4,12 @@ import Link from 'next/link';
 import Earth from '../components/Earth';
 import { PrimaryBtn } from '../components/Buttons';
 import DevelopersSection from '../partials/DevelopersSection';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../lib/authOptions';
+
 
 export default function Home() {
+	const session = getServerSession(authOptions);
 	return (
 		<>
 			<Navigation />

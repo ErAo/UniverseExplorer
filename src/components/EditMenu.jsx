@@ -6,12 +6,12 @@ import { PrimaryBtn } from './Buttons';
 import { usePathname } from 'next/navigation';
 import SolarSystemForm from './SolarSystemForm';
 
-const SideMenu = ({ openModal, isPreview, handleChange, schema, saveSystem }) => {
+const SideMenu = ({ openModal, isPreview, handleChange, schema, saveSystem, formData = {} }) => {
 	const pathname = usePathname();
 
 	return (
 		<>
-			<SolarSystemForm handleChange={handleChange} schema={schema} />
+			<SolarSystemForm handleChange={handleChange} schema={schema} formData={formData} />
 			<ul className='buttons flex has-sticky-bottom'>
 				<li>{pathname && pathname.includes('model') && (
 					<PrimaryBtn func={saveSystem}>

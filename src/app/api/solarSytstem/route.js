@@ -63,7 +63,7 @@ export async function POST(request) {
 
                 createPlanet.moons.push(createMoon);
             };
-            
+
             for (const ringData of rings) {
                 const createRing = {
                     name: ringData.name,
@@ -79,10 +79,10 @@ export async function POST(request) {
 
             processedPlanets.push(createPlanet);
         };
-        
+
         //CREATE STAR
         const processedStars = [];
-        for (const starData of stars){
+        for (const starData of stars) {
             const { name, display_name, radius, texture, speed, description } = starData;
 
             const createStar = {
@@ -98,17 +98,17 @@ export async function POST(request) {
         };
 
         // CREATE SOLAR SYSTEM
-        const createSolarSystem = new SolarSystem({ 
-            user_id, 
-            name, 
+        const createSolarSystem = new SolarSystem({
+            user_id,
+            name,
             display_name,
-            planets: processedPlanets, 
+            planets: processedPlanets,
             stars: processedStars
         });
 
         const savedSolarSystem = await createSolarSystem.save();
 
-        return NextResponse.json({ message: "Solar System Created", data:savedSolarSystem }, { status: 201 });
+        return NextResponse.json({ message: "Solar System Created", data: savedSolarSystem }, { status: 201 });
 
     } catch (error) {
         console.log(error);
@@ -136,7 +136,7 @@ export async function GET(request) {
 
         const solarSystemFound = await SolarSystem.find({ user_id });
 
-        return NextResponse.json({ solarSystemFound });
+        return NextResponse.json({ data: solarSystemFound }, { status: 200 });
 
     } catch (error) {
         console.log(error);
@@ -146,7 +146,7 @@ export async function GET(request) {
                     message: error.message,
                 },
                 {
-                    status:400,
+                    status: 400,
                 }
             );
         };
@@ -163,11 +163,11 @@ export async function DELETE(request) {
 
         await SolarSystem.findByIdAndDelete(id);
 
-        return NextResponse.json({ message: "Solar System Deleted" }, { status: 200 } );
+        return NextResponse.json({ message: "Solar System Deleted" }, { status: 200 });
 
     } catch (error) {
         console.log(error);
-        if (error instanceof mongoose.Error.ValidatorError){
+        if (error instanceof mongoose.Error.ValidatorError) {
             return NextResponse.json(
                 {
                     message: error.message,

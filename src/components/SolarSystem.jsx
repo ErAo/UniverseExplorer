@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Orbit from '../lib/Orbit';
 import { encodeBase64 } from 'bcryptjs';
 
-export default function SolarSystem({ solarSystemDB, cta }) {
+export default function SolarSystem({ solarSystemDB, cta = () => { } }) {
 	const canvasElement = useRef(null);
 	const [threeScene, setThreeScene] = useState(null);
 	const [planets, setPlanets] = useState(null);

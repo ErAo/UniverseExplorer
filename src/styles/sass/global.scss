@@ -229,7 +229,7 @@ body {
 	.dashboard__grid-container,
 	.dashboard__grid-container__edition {
 		display: grid;
-		grid-template-columns: 2fr 5fr;
+		grid-template-columns: 1fr 4fr;
 		height: 100%;
 
 		&__edition {

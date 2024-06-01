@@ -1,15 +1,34 @@
 import React from 'react';
 import Link from 'next/link';
 import Earth from './Earth';
+// get server session
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../lib/authOptions';
 
-const Dashboard_ListModels = () => {
+
+const Dashboard_ListModels = async () => {
 	const list = [
-		['New System', 'Description', '/dashboard/model/new'],
-		['Solar System', 'Description', '/dashboard/model/solar_system'],
-		['Kepler-22', 'Description', '/dashboard/model/kepler_22'],
-		['Kepler-62', 'Description', '/dashboard/model/kepler_62'],
+		['New System', 'Description', '/dashboard/model/create'],
 	];
+	const session = await getServerSession(authOptions);
+	async function getSystems() {
+		const res = await fetch(`http://localhost:3000/api/solarSytstem?user_id=${session?.user?._doc?._id}`, {
+			method: 'GET'
+		});
 
+		if (res.ok) {
+			const { data } = await res.json();
+			return data;
+		} else {
+			const errorData = await res.json();
+			console.error(errorData.message);
+			return [];
+		}
+	}
+	const getRecords = await getSystems();
+	getRecords.forEach((record) => {
+		list.push([record.display_name, record.description, `/dashboard/model/${record._id}`]);
+	});
 	return (
 		<div className='dashboard__content-container'>
 			<Earth />

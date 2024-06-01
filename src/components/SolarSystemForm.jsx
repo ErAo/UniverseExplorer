@@ -4,11 +4,6 @@ import Form from '@rjsf/core';
 import validator from '@rjsf/validator-ajv8';
 const log = (type) => console.log.bind(console, type);
 
-// generate schema from json file
-
-// read json file and convert to schema
-
-
 const jsonNames = {
 	"stars": 'Estrellas ',
 	"planets": 'Planetas ',
@@ -75,12 +70,12 @@ function convertJsonToSchema(json) {
 	return schema;
 }
 
-export default function page({ schema, handleChange }) {
+export default function page({ schema, handleChange, formData = {} }) {
 	return <Form
 		schema={convertJsonToSchema({ ...schema })}
 		onChange={handleChange}
 		validator={validator}
-		formData={{ ...schema }}
+		formData={{ ...formData }}
 		onSubmit={log('submitted')}
 		onError={log('errors')}
 	/>;
